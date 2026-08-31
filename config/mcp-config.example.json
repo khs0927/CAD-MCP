@@ -1,0 +1,66 @@
+{
+  "mcpServers": {
+    "multicad": {
+      "command": "C:\\cad-mcp\\upstreams\\multiCAD-mcp\\.venv\\Scripts\\python.exe",
+      "args": ["-m", "src.server"],
+      "cwd": "C:\\cad-mcp\\upstreams\\multiCAD-mcp",
+      "env": {
+        "FASTMCP_SHOW_SERVER_BANNER": "false",
+        "PYTHONUNBUFFERED": "1",
+        "PYTHONIOENCODING": "utf-8"
+      }
+    },
+    "zwcad-standard": {
+      "command": "C:\\cad-mcp\\upstreams\\zwcad-standard-mcp\\.venv\\Scripts\\python.exe",
+      "args": ["-m", "zwcad_standard_mcp.server"],
+      "cwd": "C:\\cad-mcp\\upstreams\\zwcad-standard-mcp",
+      "env": {
+        "ZWCAD_MCP_PROG_ID": "ZWCAD.Application",
+        "ZWCAD_MCP_TRANSPORT": "stdio",
+        "ZWCAD_MCP_ADAPTER": "com"
+      }
+    },
+    "dalingo-zwcad": {
+      "command": "C:\\cad-mcp\\upstreams\\ZWCAD-MCP\\.venv\\Scripts\\python.exe",
+      "args": ["-m", "zwcad_mcp"],
+      "cwd": "C:\\cad-mcp\\upstreams\\ZWCAD-MCP",
+      "env": {
+        "ZWCAD_MCP_BACKEND": "auto",
+        "ZWCAD_MCP_IPC_DIR": "C:/zwcad-temp"
+      }
+    },
+    "zwcad-platform": {
+      "command": "C:\\cad-mcp\\upstreams\\ZWCAD-Platform-MCP\\.venv\\Scripts\\python.exe",
+      "args": ["server.py"],
+      "cwd": "C:\\cad-mcp\\upstreams\\ZWCAD-Platform-MCP",
+      "env": {
+        "PYTHONUTF8": "1"
+      }
+    },
+    "kenchiku": {
+      "command": "C:\\cad-mcp\\upstreams\\kenchiku-mcp\\.venv\\Scripts\\python.exe",
+      "args": ["src/server.py"],
+      "cwd": "C:\\cad-mcp\\upstreams\\kenchiku-mcp",
+      "env": {
+        "DOTENV_CONFIG_QUIET": "true",
+        "PYTHONIOENCODING": "utf-8"
+      }
+    },
+    "zwcad-mechanical": {
+      "command": "C:\\cad-mcp\\upstreams\\ZWCAD-Mechanical-MCP\\.venv\\Scripts\\python.exe",
+      "args": ["server.py"],
+      "cwd": "C:\\cad-mcp\\upstreams\\ZWCAD-Mechanical-MCP",
+      "env": {
+        "PYTHONUNBUFFERED": "1"
+      }
+    },
+    "large-drawing-index": {
+      "command": "C:\\cad-mcp\\upstreams\\zwcad-mcp-server\\.venv\\Scripts\\python.exe",
+      "args": ["src/mcp_server.py"],
+      "cwd": "C:\\cad-mcp\\upstreams\\zwcad-mcp-server",
+      "env": {
+        "PYTHONUNBUFFERED": "1"
+      }
+    }
+  }
+}

@@ -1,0 +1,263 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "version": "1.0.0",
+  "updated_at": "2026-08-31T13:35:00+09:00",
+  "zwcad_target_version": "ZWCAD 2026",
+  "providers": [
+    {
+      "id": "multicad",
+      "name": "multiCAD-mcp",
+      "upstream_url": "https://github.com/AnCode666/multiCAD-mcp",
+      "commit_sha": "360ec77c970ec95a962bd4d0a3238715ee78dd7c",
+      "license": "Apache-2.0",
+      "wave": 1,
+      "namespace": "multicad",
+      "prog_id": "ZWCAD.Application",
+      "transport": "stdio",
+      "architecture": "COM_DIRECT",
+      "tool_count": 7,
+      "primary_capabilities": [
+        "general_2d_cad",
+        "layer_management",
+        "multi_document_session"
+      ],
+      "fallback_capabilities": [
+        "export_dwg",
+        "undo_redo"
+      ],
+      "command": "python",
+      "args": ["-m", "src.server"],
+      "env": {
+        "FASTMCP_SHOW_SERVER_BANNER": "false",
+        "PYTHONUNBUFFERED": "1"
+      }
+    },
+    {
+      "id": "zwcad_standard",
+      "name": "zwcad-standard-mcp",
+      "upstream_url": "https://github.com/qwtao321/zwcad-standard-mcp",
+      "commit_sha": "b2400f4b391cf6e6be0d1b84890859ac7c796646",
+      "license": "MIT",
+      "wave": 1,
+      "namespace": "zwcad_standard",
+      "prog_id": "ZWCAD.Application",
+      "transport": "stdio",
+      "architecture": "COM_TRANSACTIONAL",
+      "tool_count": 37,
+      "primary_capabilities": [
+        "safety_dry_run_confirm",
+        "undo_marks",
+        "batch_plot_folder",
+        "attribute_block_updates"
+      ],
+      "fallback_capabilities": [
+        "general_2d_cad",
+        "selection_sets"
+      ],
+      "command": "python",
+      "args": ["-m", "zwcad_standard_mcp.server"],
+      "env": {
+        "ZWCAD_MCP_PROG_ID": "ZWCAD.Application",
+        "ZWCAD_MCP_TRANSPORT": "stdio",
+        "ZWCAD_MCP_ADAPTER": "com"
+      }
+    },
+    {
+      "id": "dalingo_zwcad",
+      "name": "ZWCAD-MCP (dalingo)",
+      "upstream_url": "https://github.com/dalingo81/ZWCAD-MCP",
+      "commit_sha": "49883a983e665900bbc37b9f200daf99144818e1",
+      "license": "Custom/Permissive Reference",
+      "wave": 1,
+      "namespace": "dalingo_zwcad",
+      "prog_id": "N/A (Win32 PostMessage + AutoLISP File IPC)",
+      "transport": "stdio",
+      "architecture": "FILE_IPC_LISP",
+      "tool_count": 8,
+      "primary_capabilities": [
+        "background_execution_no_focus_steal",
+        "win32_printwindow_screenshot",
+        "execute_lisp_escape_hatch",
+        "ezdxf_headless_fallback"
+      ],
+      "fallback_capabilities": [
+        "door_window_blocks",
+        "undo_redo"
+      ],
+      "command": "python",
+      "args": ["-m", "zwcad_mcp"],
+      "env": {
+        "ZWCAD_MCP_BACKEND": "auto",
+        "ZWCAD_MCP_IPC_DIR": "C:/zwcad-temp"
+      }
+    },
+    {
+      "id": "zwcad_platform",
+      "name": "ZWCAD-Platform-MCP",
+      "upstream_url": "https://github.com/Jerri-Z/ZWCAD-Platform-MCP",
+      "commit_sha": "1d1a31bf2f4a2bac6dec90ac210a5bde5087d430",
+      "license": "MIT",
+      "wave": 1,
+      "namespace": "zwcad_platform",
+      "prog_id": "ZWCAD.Application",
+      "transport": "stdio",
+      "architecture": "COM_COMTYPES",
+      "tool_count": 26,
+      "primary_capabilities": [
+        "xdata_management",
+        "dictionary_management",
+        "system_variables_read_write",
+        "dimension_dxf_filtering",
+        "3d_solids"
+      ],
+      "fallback_capabilities": [
+        "selection_sets",
+        "table_management"
+      ],
+      "command": "python",
+      "args": ["server.py"],
+      "env": {
+        "PYTHONUTF8": "1"
+      }
+    },
+    {
+      "id": "kenchiku",
+      "name": "kenchiku-mcp",
+      "upstream_url": "https://github.com/Sora-bluesky/kenchiku-mcp",
+      "commit_sha": "934fd06db220bfb5ca5ec3b964508715e1887c24",
+      "license": "Apache-2.0",
+      "wave": 1,
+      "namespace": "kenchiku",
+      "prog_id": "ZWCAD.Application",
+      "transport": "stdio",
+      "architecture": "COM_ARCHITECTURAL",
+      "tool_count": 7,
+      "primary_capabilities": [
+        "non_uniform_block_scaling_xy",
+        "architectural_door_blocks",
+        "architectural_window_blocks",
+        "stderr_safe_stream_logging"
+      ],
+      "fallback_capabilities": [
+        "general_2d_cad",
+        "layer_creation"
+      ],
+      "command": "python",
+      "args": ["src/server.py"],
+      "env": {
+        "PYTHONIOENCODING": "utf-8"
+      }
+    },
+    {
+      "id": "zwcad_mechanical",
+      "name": "ZWCAD-Mechanical-MCP",
+      "upstream_url": "https://github.com/john0909/ZWCAD-Mechanical-MCP",
+      "commit_sha": "067b87d8704a1ed3b0a20ec4e02a59b468cbc4ff",
+      "license": "MIT",
+      "wave": 2,
+      "namespace": "zwcad_mechanical",
+      "prog_id": "ZWCAD.Application",
+      "transport": "stdio",
+      "architecture": "COM_MECHANICAL_TYPELIB",
+      "tool_count": 37,
+      "primary_capabilities": [
+        "high_precision_dimensions_tolerances",
+        "fit_symbols_iso286_h7",
+        "title_blocks_and_frames",
+        "bom_partlists"
+      ],
+      "fallback_capabilities": [
+        "table_management",
+        "geometric_dimensioning"
+      ],
+      "command": "python",
+      "args": ["server.py"],
+      "env": {
+        "PYTHONUNBUFFERED": "1"
+      }
+    },
+    {
+      "id": "large_drawing_index",
+      "name": "zwcad-mcp-server (petem903)",
+      "upstream_url": "https://github.com/petem903/zwcad-mcp-server",
+      "commit_sha": "19a5c5a8c879cf1525896dfbc08aa8e8bddc84ab",
+      "license": "MIT",
+      "wave": 2,
+      "namespace": "large_drawing_index",
+      "prog_id": "ZWCAD.Application (for round-trip bridges)",
+      "transport": "stdio",
+      "architecture": "STREAMING_INDEX_EZDXF",
+      "tool_count": 35,
+      "primary_capabilities": [
+        "large_dxf_dwg_streaming_index",
+        "spatial_radius_knn_queries",
+        "subsecond_text_search",
+        "matplotlib_headless_preview"
+      ],
+      "fallback_capabilities": [
+        "dwg_dxf_round_trip_bridge",
+        "bulk_layer_move"
+      ],
+      "command": "python",
+      "args": ["src/mcp_server.py"],
+      "env": {
+        "PYTHONUNBUFFERED": "1"
+      }
+    },
+    {
+      "id": "zwcad_control",
+      "name": "zwcad-control-mcp",
+      "upstream_url": "https://github.com/Whfkl/zwcad-control-mcp",
+      "commit_sha": "beef1dc293738060f0fd3da284d2579666b078fd",
+      "license": "Unlicensed (Architecture Reference Only)",
+      "wave": 3,
+      "namespace": "zwcad_control",
+      "prog_id": "In-Process .NET Plugin (Named Pipe)",
+      "transport": "stdio",
+      "architecture": "IN_PROCESS_PLUGIN_NAMED_PIPE",
+      "tool_count": 5,
+      "primary_capabilities": [
+        "explicit_instance_doc_id_context",
+        "persistent_selection_json",
+        "run_csharp_script_context",
+        "run_lisp_in_process",
+        "selection_bounded_capture"
+      ],
+      "fallback_capabilities": [
+        "visual_screenshot"
+      ],
+      "command": "zwcad-control-mcp.exe",
+      "args": [],
+      "env": {}
+    },
+    {
+      "id": "autocad_mcp",
+      "name": "Autocad-MCP (U-C4N)",
+      "upstream_url": "https://github.com/U-C4N/Autocad-MCP",
+      "commit_sha": "abc2a82e7128358b9e228a7d9442b37019aa3fe5",
+      "license": "MIT",
+      "wave": 3,
+      "namespace": "autocad_mcp",
+      "prog_id": "CAD_PROGID=ZWCAD.Application",
+      "transport": "stdio",
+      "architecture": "COM_EZDXF_DUAL_DISCOVERY",
+      "tool_count": 154,
+      "primary_capabilities": [
+        "tool_discovery_search_corpus",
+        "token_budget_optimization_356tokens",
+        "quality_loop_preflight_plan_critique_deliver",
+        "transaction_rollback"
+      ],
+      "fallback_capabilities": [
+        "window_capture"
+      ],
+      "command": "python",
+      "args": ["-m", "autocad_mcp"],
+      "env": {
+        "CAD_PROGID": "ZWCAD.Application",
+        "TOOL_PROFILE": "lean",
+        "DISCOVERY_MODE": "search"
+      }
+    }
+  ]
+}

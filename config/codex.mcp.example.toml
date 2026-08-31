@@ -1,0 +1,122 @@
+# CAD-MCP Multi-Provider Configuration for Codex / Agent Hosts
+# Generated from verified ZWCAD 2026 comparative evaluation
+# Architecture: Independent upstream providers isolated in namespaces
+
+# ==============================================================================
+# Wave 1: Priority Comparative Baseline
+# ==============================================================================
+
+[mcp_servers.multicad]
+enabled = true
+startup_timeout_sec = 30
+tool_timeout_sec = 120
+command = "C:\\cad-mcp\\upstreams\\multiCAD-mcp\\.venv\\Scripts\\python.exe"
+args = ["-m", "src.server"]
+cwd = "C:\\cad-mcp\\upstreams\\multiCAD-mcp"
+
+[mcp_servers.multicad.env]
+FASTMCP_SHOW_SERVER_BANNER = "false"
+PYTHONUNBUFFERED = "1"
+PYTHONIOENCODING = "utf-8"
+
+[mcp_servers.zwcad_standard]
+enabled = true
+startup_timeout_sec = 30
+tool_timeout_sec = 120
+command = "C:\\cad-mcp\\upstreams\\zwcad-standard-mcp\\.venv\\Scripts\\python.exe"
+args = ["-m", "zwcad_standard_mcp.server"]
+cwd = "C:\\cad-mcp\\upstreams\\zwcad-standard-mcp"
+
+[mcp_servers.zwcad_standard.env]
+ZWCAD_MCP_PROG_ID = "ZWCAD.Application"
+ZWCAD_MCP_TRANSPORT = "stdio"
+ZWCAD_MCP_ADAPTER = "com"
+
+[mcp_servers.dalingo_zwcad]
+enabled = true
+startup_timeout_sec = 30
+tool_timeout_sec = 120
+command = "C:\\cad-mcp\\upstreams\\ZWCAD-MCP\\.venv\\Scripts\\python.exe"
+args = ["-m", "zwcad_mcp"]
+cwd = "C:\\cad-mcp\\upstreams\\ZWCAD-MCP"
+
+[mcp_servers.dalingo_zwcad.env]
+ZWCAD_MCP_BACKEND = "auto"
+ZWCAD_MCP_IPC_DIR = "C:/zwcad-temp"
+
+[mcp_servers.zwcad_platform]
+enabled = true
+startup_timeout_sec = 30
+tool_timeout_sec = 120
+command = "C:\\cad-mcp\\upstreams\\ZWCAD-Platform-MCP\\.venv\\Scripts\\python.exe"
+args = ["server.py"]
+cwd = "C:\\cad-mcp\\upstreams\\ZWCAD-Platform-MCP"
+
+[mcp_servers.zwcad_platform.env]
+PYTHONUTF8 = "1"
+
+[mcp_servers.kenchiku]
+enabled = true
+startup_timeout_sec = 30
+tool_timeout_sec = 120
+command = "C:\\cad-mcp\\upstreams\\kenchiku-mcp\\.venv\\Scripts\\python.exe"
+args = ["src/server.py"]
+cwd = "C:\\cad-mcp\\upstreams\\kenchiku-mcp"
+
+[mcp_servers.kenchiku.env]
+DOTENV_CONFIG_QUIET = "true"
+PYTHONIOENCODING = "utf-8"
+
+# ==============================================================================
+# Wave 2: Specialized Capabilities (Dimensions, BOM, Large Drawing Indexing)
+# ==============================================================================
+
+[mcp_servers.zwcad_mechanical]
+enabled = true
+startup_timeout_sec = 30
+tool_timeout_sec = 180
+command = "C:\\cad-mcp\\upstreams\\ZWCAD-Mechanical-MCP\\.venv\\Scripts\\python.exe"
+args = ["server.py"]
+cwd = "C:\\cad-mcp\\upstreams\\ZWCAD-Mechanical-MCP"
+
+[mcp_servers.zwcad_mechanical.env]
+PYTHONUNBUFFERED = "1"
+
+[mcp_servers.large_drawing_index]
+enabled = true
+startup_timeout_sec = 30
+tool_timeout_sec = 300
+command = "C:\\cad-mcp\\upstreams\\zwcad-mcp-server\\.venv\\Scripts\\python.exe"
+args = ["src/mcp_server.py"]
+cwd = "C:\\cad-mcp\\upstreams\\zwcad-mcp-server"
+
+[mcp_servers.large_drawing_index.env]
+PYTHONUNBUFFERED = "1"
+
+# ==============================================================================
+# Wave 3: Experimental / Architecture Reference
+# ==============================================================================
+
+# Note: zwcad-control uses in-process plugin + named pipe.
+# Uncheck or enable when the .NET plugin DLL is loaded via NETLOAD in ZWCAD.
+[mcp_servers.zwcad_control]
+enabled = false
+startup_timeout_sec = 60
+tool_timeout_sec = 180
+command = "C:\\cad-mcp\\upstreams\\zwcad-control-mcp\\zwcad-control-mcp.exe"
+args = []
+cwd = "C:\\cad-mcp\\upstreams\\zwcad-control-mcp"
+
+# Note: AutoCAD MCP configured in Lean Discovery Mode for ZWCAD PROGID probe
+[mcp_servers.autocad_mcp]
+enabled = false
+startup_timeout_sec = 30
+tool_timeout_sec = 120
+command = "C:\\cad-mcp\\upstreams\\Autocad-MCP\\.venv\\Scripts\\python.exe"
+args = ["-m", "autocad_mcp"]
+cwd = "C:\\cad-mcp\\upstreams\\Autocad-MCP"
+
+[mcp_servers.autocad_mcp.env]
+CAD_PROGID = "ZWCAD.Application"
+TOOL_PROFILE = "lean"
+DISCOVERY_MODE = "search"

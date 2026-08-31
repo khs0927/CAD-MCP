@@ -1,0 +1,96 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "version": "1.0.0",
+  "updated_at": "2026-08-31T13:35:00+09:00",
+  "description": "Benchmark and watchlist CAD/BIM MCP projects evaluated for architectural patterns, RPC, discovery, and safety models.",
+  "watchlist": [
+    {
+      "repo": "bimwright/dwg-mcp",
+      "category": "BIM / DWG",
+      "architecture": "Rust/Python hybrid with DWG direct parser",
+      "key_innovations": [
+        "Headless DWG decoding without CAD seat",
+        "Spatial bounding hierarchy index",
+        "Deterministic layer taxonomy validation"
+      ],
+      "applicability_to_zwcad": "High for server-side preflight and indexing before dispatching to live CAD."
+    },
+    {
+      "repo": "codesknight/AutoCAD-MCP",
+      "category": "AutoCAD COM",
+      "architecture": "C# In-Process / COM Server",
+      "key_innovations": [
+        "ObjectARX native acceleration",
+        "Entity selection memory buffer",
+        "Fast transaction commit / abort"
+      ],
+      "applicability_to_zwcad": "Strong design pattern for high-speed ZWCAD ZRX / .NET plugin implementation."
+    },
+    {
+      "repo": "bimwright/rvt-mcp",
+      "category": "Revit / BIM",
+      "architecture": "Revit API in-process add-in with external event queue",
+      "key_innovations": [
+        "Thread-safe external event synchronization",
+        "Semantic element parameter schemas",
+        "BIM level/grid hierarchy extraction"
+      ],
+      "applicability_to_zwcad": "Applicable for architectural level/space data extraction in multi-story CAD projects."
+    },
+    {
+      "repo": "Boti-Ormandi/archicad-mcp",
+      "category": "ArchiCAD",
+      "architecture": "JSON-RPC over HTTP to ArchiCAD Live API",
+      "key_innovations": [
+        "Clean REST/JSON-RPC boundary",
+        "Parametric door/window composite attributes",
+        "Element classification queries"
+      ],
+      "applicability_to_zwcad": "Informs architectural door/window tool definitions and composite scaling."
+    },
+    {
+      "repo": "neka-nat/freecad-mcp",
+      "category": "FreeCAD / Open Source CAD",
+      "architecture": "Python FastMCP with FreeCAD GUI / headless worker",
+      "key_innovations": [
+        "Dynamic SVG/PNG viewport render pipeline",
+        "IFC OpenShell integration",
+        "Parametric constraint graph modeling"
+      ],
+      "applicability_to_zwcad": "Excellent visual feedback and IFC bridge architecture."
+    },
+    {
+      "repo": "tanishqbhattad/rhino-mcp",
+      "category": "Rhino 3D",
+      "architecture": "RhinoCommon compute / gRPC bridge",
+      "key_innovations": [
+        "Named view turntable animations",
+        "NURBS / Brep validation checks",
+        "Grasshopper script parameter execution"
+      ],
+      "applicability_to_zwcad": "Model check, naked edge detection, and visual turntable ideas."
+    },
+    {
+      "repo": "Daviidro/ifcopenshell-mcp",
+      "category": "IFC / OpenBIM",
+      "architecture": "Python IfcOpenShell query engine",
+      "key_innovations": [
+        "PropertySet and QuantitySet validation",
+        "IFC schema compliance verification",
+        "Clash detection between building elements"
+      ],
+      "applicability_to_zwcad": "BIM compliance and metadata audit for exported CAD models."
+    },
+    {
+      "repo": "daobataotie/CAD-MCP",
+      "category": "Multi-CAD Automation",
+      "architecture": "SQLite metadata tracking + CAD controller mixin",
+      "key_innovations": [
+        "Local SQLite database for drawing state history",
+        "NLP intent classification router",
+        "Multi-CAD abstraction layer"
+      ],
+      "applicability_to_zwcad": "Validates state persistence and prompt disambiguation before CAD write operations."
+    }
+  ]
+}

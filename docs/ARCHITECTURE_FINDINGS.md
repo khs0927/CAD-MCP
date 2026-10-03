@@ -1,3 +1,5 @@
+> Evidence correction: historical PASS rates, scores, rankings and performance claims in this document are unverified legacy assumptions (LEGACY_SYNTHETIC). They are not candidate MCP execution evidence. Do not use them to authorize execution.
+
 # CAD-MCP Architectural Findings & System Insights
 
 Deep architectural evaluation of CAD MCP architectures, IPC mechanisms, discovery protocols, and safety models across all tested providers and benchmark systems.

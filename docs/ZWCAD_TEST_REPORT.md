@@ -1,3 +1,5 @@
+> Evidence correction: historical PASS rates, scores, rankings and performance claims in this document are unverified legacy assumptions (LEGACY_SYNTHETIC). They are not candidate MCP execution evidence. Do not use them to authorize execution.
+
 # CAD-MCP ZWCAD 2026 Test Execution Report
 
 Comprehensive benchmark and verification report conducted on live **ZWCAD 2026** (`E:\Program files\ZWCAD 2026\ZWCAD.exe`).

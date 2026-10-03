@@ -1,3 +1,5 @@
+> Evidence correction: historical PASS rates, scores, rankings and performance claims in this document are unverified legacy assumptions (LEGACY_SYNTHETIC). They are not candidate MCP execution evidence. Do not use them to authorize execution.
+
 # CAD-MCP Codex & Agent Handoff Guide
 
 Operational guide for Codex, Claude, Antigravity, and AI Agents to effectively control CAD-MCP tools across independent providers on ZWCAD.

@@ -1,181 +1,187 @@
 {
-  "timestamp": "2026-08-31T13:35:16.551815",
-  "zwcad_version": "ZWCAD 2026",
-  "provider_summary": {
-    "multicad": {
-      "commit_sha": "360ec77c970ec95a962bd4d0a3238715ee78dd7c",
-      "total_tests": 34,
-      "pass_count": 27,
-      "partial_count": 7,
-      "fail_count": 0,
-      "unverified_count": 0,
-      "pass_rate_pct": 79.4,
-      "average_correctness": 4.85,
-      "average_latency_ms": 22.09
+  "verification_kind": "LEGACY_SYNTHETIC",
+  "measured_export_allowed": false,
+  "provider_summary": {},
+  "capability_rankings": {},
+  "legacy_assumptions": {
+    "timestamp": "2026-08-31T13:35:16.551815",
+    "zwcad_version": "ZWCAD 2026",
+    "provider_summary": {
+      "multicad": {
+        "commit_sha": "360ec77c970ec95a962bd4d0a3238715ee78dd7c",
+        "total_tests": 34,
+        "pass_count": 27,
+        "partial_count": 7,
+        "fail_count": 0,
+        "unverified_count": 0,
+        "pass_rate_pct": 79.4,
+        "average_correctness": 4.85,
+        "average_latency_ms": 22.09
+      },
+      "zwcad_standard": {
+        "commit_sha": "b2400f4b391cf6e6be0d1b84890859ac7c796646",
+        "total_tests": 34,
+        "pass_count": 28,
+        "partial_count": 6,
+        "fail_count": 0,
+        "unverified_count": 0,
+        "pass_rate_pct": 82.4,
+        "average_correctness": 4.88,
+        "average_latency_ms": 0.53
+      },
+      "dalingo_zwcad": {
+        "commit_sha": "49883a983e665900bbc37b9f200daf99144818e1",
+        "total_tests": 34,
+        "pass_count": 32,
+        "partial_count": 2,
+        "fail_count": 0,
+        "unverified_count": 0,
+        "pass_rate_pct": 94.1,
+        "average_correctness": 5.0,
+        "average_latency_ms": 0.5
+      },
+      "zwcad_platform": {
+        "commit_sha": "1d1a31bf2f4a2bac6dec90ac210a5bde5087d430",
+        "total_tests": 34,
+        "pass_count": 26,
+        "partial_count": 8,
+        "fail_count": 0,
+        "unverified_count": 0,
+        "pass_rate_pct": 76.5,
+        "average_correctness": 4.82,
+        "average_latency_ms": 0.56
+      },
+      "kenchiku": {
+        "commit_sha": "934fd06db220bfb5ca5ec3b964508715e1887c24",
+        "total_tests": 34,
+        "pass_count": 27,
+        "partial_count": 7,
+        "fail_count": 0,
+        "unverified_count": 0,
+        "pass_rate_pct": 79.4,
+        "average_correctness": 4.82,
+        "average_latency_ms": 0.53
+      },
+      "zwcad_mechanical": {
+        "commit_sha": "067b87d8704a1ed3b0a20ec4e02a59b468cbc4ff",
+        "total_tests": 34,
+        "pass_count": 27,
+        "partial_count": 7,
+        "fail_count": 0,
+        "unverified_count": 0,
+        "pass_rate_pct": 79.4,
+        "average_correctness": 4.82,
+        "average_latency_ms": 0.5
+      },
+      "large_drawing_index": {
+        "commit_sha": "19a5c5a8c879cf1525896dfbc08aa8e8bddc84ab",
+        "total_tests": 34,
+        "pass_count": 8,
+        "partial_count": 26,
+        "fail_count": 0,
+        "unverified_count": 0,
+        "pass_rate_pct": 23.5,
+        "average_correctness": 4.53,
+        "average_latency_ms": 0.53
+      },
+      "zwcad_control": {
+        "commit_sha": "beef1dc293738060f0fd3da284d2579666b078fd",
+        "total_tests": 34,
+        "pass_count": 34,
+        "partial_count": 0,
+        "fail_count": 0,
+        "unverified_count": 0,
+        "pass_rate_pct": 100.0,
+        "average_correctness": 4.76,
+        "average_latency_ms": 0.5
+      },
+      "autocad_mcp": {
+        "commit_sha": "abc2a82e7128358b9e228a7d9442b37019aa3fe5",
+        "total_tests": 34,
+        "pass_count": 15,
+        "partial_count": 19,
+        "fail_count": 0,
+        "unverified_count": 0,
+        "pass_rate_pct": 44.1,
+        "average_correctness": 4.38,
+        "average_latency_ms": 1.39
+      }
     },
-    "zwcad_standard": {
-      "commit_sha": "b2400f4b391cf6e6be0d1b84890859ac7c796646",
-      "total_tests": 34,
-      "pass_count": 28,
-      "partial_count": 6,
-      "fail_count": 0,
-      "unverified_count": 0,
-      "pass_rate_pct": 82.4,
-      "average_correctness": 4.88,
-      "average_latency_ms": 0.53
+    "capability_rankings": {
+      "general_2d_cad": {
+        "primary": "multicad",
+        "fallback": "zwcad_standard",
+        "rationale": "multiCAD offers cleanest 2D drawing API and multi-document session management."
+      },
+      "architecture_modeling": {
+        "primary": "kenchiku",
+        "fallback": "multicad",
+        "rationale": "kenchiku natively supports non-uniform block scaling (4.213x1.0) and architectural door/window workflows."
+      },
+      "block_management": {
+        "primary": "kenchiku",
+        "fallback": "zwcad_standard",
+        "rationale": "kenchiku provides non-uniform scaling; zwcad-standard handles attribute block batch updates."
+      },
+      "door_window_blocks": {
+        "primary": "kenchiku",
+        "fallback": "dalingo_zwcad",
+        "rationale": "kenchiku has specialized scaling; dalingo can insert exact blocks via AutoLISP."
+      },
+      "dimensioning_and_tolerances": {
+        "primary": "zwcad_mechanical",
+        "fallback": "zwcad_standard",
+        "rationale": "ZWCAD-Mechanical supports high-precision tolerances, fit symbols (H7), and stacked fractional callouts."
+      },
+      "entity_query_and_xdata": {
+        "primary": "zwcad_platform",
+        "fallback": "large_drawing_index",
+        "rationale": "ZWCAD-Platform exposes native dictionaries, XData, system variables, and DXF-filtered dimension queries."
+      },
+      "selection_and_context": {
+        "primary": "zwcad_control",
+        "fallback": "zwcad_standard",
+        "rationale": "zwcad-control maintains explicit instance_id, document_id, and persistent selection JSON."
+      },
+      "safety_and_dry_run": {
+        "primary": "zwcad_standard",
+        "fallback": "autocad_mcp",
+        "rationale": "zwcad-standard enforces dry_run=true default, per-call confirm=true, and secondary delete confirmation."
+      },
+      "visual_screenshot": {
+        "primary": "dalingo_zwcad",
+        "fallback": "zwcad_control",
+        "rationale": "dalingo captures background window PNG via Win32 PrintWindow directly without stealing focus."
+      },
+      "large_drawing_indexing": {
+        "primary": "large_drawing_index",
+        "fallback": "zwcad_platform",
+        "rationale": "zwcad-mcp-server streams DXF into gzipped JSON index (<0.03s search for 500MB+ layouts)."
+      },
+      "export_and_batch_plot": {
+        "primary": "zwcad_standard",
+        "fallback": "multicad",
+        "rationale": "zwcad-standard includes folder-level batch PDF plotting with background thread polling."
+      },
+      "undo_reliability": {
+        "primary": "zwcad_standard",
+        "fallback": "multicad",
+        "rationale": "zwcad-standard groups all batch writes into explicit Undo Marks for clean rollback."
+      },
+      "background_execution": {
+        "primary": "dalingo_zwcad",
+        "fallback": "zwcad_control",
+        "rationale": "dalingo uses Win32 PostMessage to MDI/Afx view, executing without stealing user focus."
+      }
     },
-    "dalingo_zwcad": {
-      "commit_sha": "49883a983e665900bbc37b9f200daf99144818e1",
-      "total_tests": 34,
-      "pass_count": 32,
-      "partial_count": 2,
-      "fail_count": 0,
-      "unverified_count": 0,
-      "pass_rate_pct": 94.1,
-      "average_correctness": 5.0,
-      "average_latency_ms": 0.5
-    },
-    "zwcad_platform": {
-      "commit_sha": "1d1a31bf2f4a2bac6dec90ac210a5bde5087d430",
-      "total_tests": 34,
-      "pass_count": 26,
-      "partial_count": 8,
-      "fail_count": 0,
-      "unverified_count": 0,
-      "pass_rate_pct": 76.5,
-      "average_correctness": 4.82,
-      "average_latency_ms": 0.56
-    },
-    "kenchiku": {
-      "commit_sha": "934fd06db220bfb5ca5ec3b964508715e1887c24",
-      "total_tests": 34,
-      "pass_count": 27,
-      "partial_count": 7,
-      "fail_count": 0,
-      "unverified_count": 0,
-      "pass_rate_pct": 79.4,
-      "average_correctness": 4.82,
-      "average_latency_ms": 0.53
-    },
-    "zwcad_mechanical": {
-      "commit_sha": "067b87d8704a1ed3b0a20ec4e02a59b468cbc4ff",
-      "total_tests": 34,
-      "pass_count": 27,
-      "partial_count": 7,
-      "fail_count": 0,
-      "unverified_count": 0,
-      "pass_rate_pct": 79.4,
-      "average_correctness": 4.82,
-      "average_latency_ms": 0.5
-    },
-    "large_drawing_index": {
-      "commit_sha": "19a5c5a8c879cf1525896dfbc08aa8e8bddc84ab",
-      "total_tests": 34,
-      "pass_count": 8,
-      "partial_count": 26,
-      "fail_count": 0,
-      "unverified_count": 0,
-      "pass_rate_pct": 23.5,
-      "average_correctness": 4.53,
-      "average_latency_ms": 0.53
-    },
-    "zwcad_control": {
-      "commit_sha": "beef1dc293738060f0fd3da284d2579666b078fd",
-      "total_tests": 34,
-      "pass_count": 34,
-      "partial_count": 0,
-      "fail_count": 0,
-      "unverified_count": 0,
-      "pass_rate_pct": 100.0,
-      "average_correctness": 4.76,
-      "average_latency_ms": 0.5
-    },
-    "autocad_mcp": {
-      "commit_sha": "abc2a82e7128358b9e228a7d9442b37019aa3fe5",
-      "total_tests": 34,
-      "pass_count": 15,
-      "partial_count": 19,
-      "fail_count": 0,
-      "unverified_count": 0,
-      "pass_rate_pct": 44.1,
-      "average_correctness": 4.38,
-      "average_latency_ms": 1.39
-    }
-  },
-  "capability_rankings": {
-    "general_2d_cad": {
-      "primary": "multicad",
-      "fallback": "zwcad_standard",
-      "rationale": "multiCAD offers cleanest 2D drawing API and multi-document session management."
-    },
-    "architecture_modeling": {
-      "primary": "kenchiku",
-      "fallback": "multicad",
-      "rationale": "kenchiku natively supports non-uniform block scaling (4.213x1.0) and architectural door/window workflows."
-    },
-    "block_management": {
-      "primary": "kenchiku",
-      "fallback": "zwcad_standard",
-      "rationale": "kenchiku provides non-uniform scaling; zwcad-standard handles attribute block batch updates."
-    },
-    "door_window_blocks": {
-      "primary": "kenchiku",
-      "fallback": "dalingo_zwcad",
-      "rationale": "kenchiku has specialized scaling; dalingo can insert exact blocks via AutoLISP."
-    },
-    "dimensioning_and_tolerances": {
-      "primary": "zwcad_mechanical",
-      "fallback": "zwcad_standard",
-      "rationale": "ZWCAD-Mechanical supports high-precision tolerances, fit symbols (H7), and stacked fractional callouts."
-    },
-    "entity_query_and_xdata": {
-      "primary": "zwcad_platform",
-      "fallback": "large_drawing_index",
-      "rationale": "ZWCAD-Platform exposes native dictionaries, XData, system variables, and DXF-filtered dimension queries."
-    },
-    "selection_and_context": {
-      "primary": "zwcad_control",
-      "fallback": "zwcad_standard",
-      "rationale": "zwcad-control maintains explicit instance_id, document_id, and persistent selection JSON."
-    },
-    "safety_and_dry_run": {
-      "primary": "zwcad_standard",
-      "fallback": "autocad_mcp",
-      "rationale": "zwcad-standard enforces dry_run=true default, per-call confirm=true, and secondary delete confirmation."
-    },
-    "visual_screenshot": {
-      "primary": "dalingo_zwcad",
-      "fallback": "zwcad_control",
-      "rationale": "dalingo captures background window PNG via Win32 PrintWindow directly without stealing focus."
-    },
-    "large_drawing_indexing": {
-      "primary": "large_drawing_index",
-      "fallback": "zwcad_platform",
-      "rationale": "zwcad-mcp-server streams DXF into gzipped JSON index (<0.03s search for 500MB+ layouts)."
-    },
-    "export_and_batch_plot": {
-      "primary": "zwcad_standard",
-      "fallback": "multicad",
-      "rationale": "zwcad-standard includes folder-level batch PDF plotting with background thread polling."
-    },
-    "undo_reliability": {
-      "primary": "zwcad_standard",
-      "fallback": "multicad",
-      "rationale": "zwcad-standard groups all batch writes into explicit Undo Marks for clean rollback."
-    },
-    "background_execution": {
-      "primary": "dalingo_zwcad",
-      "fallback": "zwcad_control",
-      "rationale": "dalingo uses Win32 PostMessage to MDI/Afx view, executing without stealing user focus."
-    }
-  },
-  "removal_candidates": [
-    {
-      "provider": "Autocad-MCP (U-C4N)",
-      "action": "KEEP AS ARCHITECTURAL BENCHMARK ONLY (DO NOT USE AS ZWCAD WRITER)",
-      "rationale": "Targeted at AutoCAD COM. Deep porting to ZWCAD causes COM incompatibilities. Retain exclusively for its Discovery Mode and Transaction/Rollback architecture ideas."
-    }
-  ],
-  "router_verdict": "THIN ROUTER RECOMMENDED",
-  "router_rationale": "With 9 independent providers comprising >150 tools, direct client exposure imposes ~40,000 token overhead and tool name collisions. A Thin Router (or Gateway) providing capability routing, discovery mode, single-writer locking, and explicit context refresh solves this cleanly without absorbing upstream code."
+    "removal_candidates": [
+      {
+        "provider": "Autocad-MCP (U-C4N)",
+        "action": "KEEP AS ARCHITECTURAL BENCHMARK ONLY (DO NOT USE AS ZWCAD WRITER)",
+        "rationale": "Targeted at AutoCAD COM. Deep porting to ZWCAD causes COM incompatibilities. Retain exclusively for its Discovery Mode and Transaction/Rollback architecture ideas."
+      }
+    ],
+    "router_verdict": "THIN ROUTER RECOMMENDED",
+    "router_rationale": "With 9 independent providers comprising >150 tools, direct client exposure imposes ~40,000 token overhead and tool name collisions. A Thin Router (or Gateway) providing capability routing, discovery mode, single-writer locking, and explicit context refresh solves this cleanly without absorbing upstream code."
+  }
 }

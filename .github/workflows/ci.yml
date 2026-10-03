@@ -28,5 +28,7 @@ jobs:
         run: python -m json.tool registry/watchlist.json > /dev/null
       - name: Generate architectural fixture
         run: python scripts/generate_fixtures.py
-      - name: Score checked-in benchmark results
+      - name: Verify synthetic evidence isolation
+        run: python -m unittest discover -s tests -v
+      - name: Inspect non-measured evidence status
         run: python scripts/score_results.py

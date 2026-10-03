@@ -1,7 +1,7 @@
 """
 CAD-MCP Automated Benchmark Runner & ZWCAD Test Harness
-Executes T01-T34 standardized test suite against live ZWCAD 2026 and candidate MCP providers.
-Records execution metrics, latencies, correctness, Undo validation, and generates evidence logs/screenshots.
+Generates LEGACY_SYNTHETIC examples from hardcoded provider/test assumptions.
+Does not invoke candidate MCP providers; no output is measured evidence.
 """
 
 import csv
@@ -78,7 +78,7 @@ TEST_DESCRIPTIONS = {
 class ZWCADTestHarness:
     def __init__(self, workspace_root: str):
         self.workspace_root = workspace_root
-        self.results_dir = os.path.join(workspace_root, "results")
+        self.results_dir = os.path.join(workspace_root, "results", "synthetic")
         self.evidence_dir = os.path.join(workspace_root, "evidence")
         self.screenshots_dir = os.path.join(self.evidence_dir, "screenshots")
         self.logs_dir = os.path.join(self.evidence_dir, "logs")
@@ -90,7 +90,7 @@ class ZWCADTestHarness:
         self.zwcad_app = None
         self.zwcad_doc = None
         self.zwcad_version = "ZWCAD 2026"
-        self._init_com()
+        # Synthetic generation must never attach to or mutate a CAD host.
 
     def _init_com(self):
         try:
@@ -192,7 +192,7 @@ class ZWCADTestHarness:
         # Write CSV
         csv_file = os.path.join(self.results_dir, "provider-results.csv")
         fieldnames = [
-            "provider", "test_id", "test_name", "zwcad_version", "status",
+            "verification_kind", "measured_export_allowed", "legacy_assumed_status", "legacy_assumed_score", "provider", "test_id", "test_name", "zwcad_version", "status",
             "latency_ms", "correctness_score", "geometry_correctness", "layer_correctness",
             "context_stability", "selection_stability", "undo_reliability", "save_reliability",
             "screenshot_availability", "manual_intervention_count", "repair_step_count",
@@ -227,7 +227,7 @@ class ZWCADTestHarness:
                 t0 = time.time()
                 result = self._run_test_case(provider, test_id, test_name, logf)
                 latency = round((time.time() - t0) * 1000, 2)
-                result["latency_ms"] = latency
+                result["latency_ms"] = None
                 records.append(result)
                 logf.write(f"[{test_id}] {test_name}: {result['status']} ({latency}ms) - {result['notes']}\n")
                 print(f"  {test_id} {test_name[:35]:<36} : {result['status']:<7} [{latency:>6.1f}ms]")
@@ -426,70 +426,32 @@ class ZWCADTestHarness:
                 rec["status"] = "PARTIAL"
                 rec["notes"] = "Architectural benchmark reference for Tool Discovery and Quality Loop."
 
-        # If COM is live, trigger a quick sanity write and capture screenshot evidence for key tests
-        if test_id in ["T01", "T05", "T11", "T18", "T22", "T25", "T34"]:
-            self.capture_screenshot(evidence_shot)
+        # Preserve assumptions explicitly, never expose them as measured outcomes.
+        rec["verification_kind"] = "LEGACY_SYNTHETIC"
+        rec["measured_export_allowed"] = False
+        rec["legacy_assumed_status"] = rec["status"]
+        rec["legacy_assumed_score"] = rec["correctness_score"]
+        rec["status"] = "UNVERIFIED"
+        for key in ("latency_ms", "correctness_score", "geometry_correctness",
+                    "layer_correctness", "context_stability", "selection_stability",
+                    "undo_reliability", "save_reliability", "screenshot_availability",
+                    "manual_intervention_count", "repair_step_count", "error_message_quality"):
+            rec[key] = None
+        rec["evidence_path"] = ""
+        rec["notes"] = "Unverified legacy assumption: " + rec["notes"]
 
         return rec
 
     def _compute_summary(self, records: list) -> dict:
-        provider_stats = {}
-        for p in PROVIDERS:
-            p_recs = [r for r in records if r["provider"] == p]
-            passes = sum(1 for r in p_recs if r["status"] == "PASS")
-            partials = sum(1 for r in p_recs if r["status"] == "PARTIAL")
-            fails = sum(1 for r in p_recs if r["status"] == "FAIL")
-            unverified = sum(1 for r in p_recs if r["status"] == "UNVERIFIED")
-            avg_score = round(sum(r["correctness_score"] for r in p_recs) / len(p_recs), 2)
-            avg_latency = round(sum(r["latency_ms"] for r in p_recs) / len(p_recs), 2)
-            
-            provider_stats[p] = {
-                "commit_sha": UPSTREAM_SHAS[p],
-                "total_tests": len(p_recs),
-                "pass_count": passes,
-                "partial_count": partials,
-                "fail_count": fails,
-                "unverified_count": unverified,
-                "pass_rate_pct": round((passes / len(p_recs)) * 100, 1),
-                "average_correctness": avg_score,
-                "average_latency_ms": avg_latency
-            }
-
-        capability_rankings = {
-            "general_2d_cad": {"primary": "multicad", "fallback": "zwcad_standard", "rationale": "multiCAD offers cleanest 2D drawing API and multi-document session management."},
-            "architecture_modeling": {"primary": "kenchiku", "fallback": "multicad", "rationale": "kenchiku natively supports non-uniform block scaling (4.213x1.0) and architectural door/window workflows."},
-            "block_management": {"primary": "kenchiku", "fallback": "zwcad_standard", "rationale": "kenchiku provides non-uniform scaling; zwcad-standard handles attribute block batch updates."},
-            "door_window_blocks": {"primary": "kenchiku", "fallback": "dalingo_zwcad", "rationale": "kenchiku has specialized scaling; dalingo can insert exact blocks via AutoLISP."},
-            "dimensioning_and_tolerances": {"primary": "zwcad_mechanical", "fallback": "zwcad_standard", "rationale": "ZWCAD-Mechanical supports high-precision tolerances, fit symbols (H7), and stacked fractional callouts."},
-            "entity_query_and_xdata": {"primary": "zwcad_platform", "fallback": "large_drawing_index", "rationale": "ZWCAD-Platform exposes native dictionaries, XData, system variables, and DXF-filtered dimension queries."},
-            "selection_and_context": {"primary": "zwcad_control", "fallback": "zwcad_standard", "rationale": "zwcad-control maintains explicit instance_id, document_id, and persistent selection JSON."},
-            "safety_and_dry_run": {"primary": "zwcad_standard", "fallback": "autocad_mcp", "rationale": "zwcad-standard enforces dry_run=true default, per-call confirm=true, and secondary delete confirmation."},
-            "visual_screenshot": {"primary": "dalingo_zwcad", "fallback": "zwcad_control", "rationale": "dalingo captures background window PNG via Win32 PrintWindow directly without stealing focus."},
-            "large_drawing_indexing": {"primary": "large_drawing_index", "fallback": "zwcad_platform", "rationale": "zwcad-mcp-server streams DXF into gzipped JSON index (<0.03s search for 500MB+ layouts)."},
-            "export_and_batch_plot": {"primary": "zwcad_standard", "fallback": "multicad", "rationale": "zwcad-standard includes folder-level batch PDF plotting with background thread polling."},
-            "undo_reliability": {"primary": "zwcad_standard", "fallback": "multicad", "rationale": "zwcad-standard groups all batch writes into explicit Undo Marks for clean rollback."},
-            "background_execution": {"primary": "dalingo_zwcad", "fallback": "zwcad_control", "rationale": "dalingo uses Win32 PostMessage to MDI/Afx view, executing without stealing user focus."}
-        }
-
-        removal_candidates = [
-            {
-                "provider": "Autocad-MCP (U-C4N)",
-                "action": "KEEP AS ARCHITECTURAL BENCHMARK ONLY (DO NOT USE AS ZWCAD WRITER)",
-                "rationale": "Targeted at AutoCAD COM. Deep porting to ZWCAD causes COM incompatibilities. Retain exclusively for its Discovery Mode and Transaction/Rollback architecture ideas."
-            }
-        ]
-
         return {
-            "timestamp": datetime.now().isoformat(),
-            "zwcad_version": self.zwcad_version,
-            "provider_summary": provider_stats,
-            "capability_rankings": capability_rankings,
-            "removal_candidates": removal_candidates,
-            "router_verdict": "THIN ROUTER RECOMMENDED",
-            "router_rationale": "With 9 independent providers comprising >150 tools, direct client exposure imposes ~40,000 token overhead and tool name collisions. A Thin Router (or Gateway) providing capability routing, discovery mode, single-writer locking, and explicit context refresh solves this cleanly without absorbing upstream code."
+            "verification_kind": "LEGACY_SYNTHETIC",
+            "measured_export_allowed": False,
+            "record_count": len(records),
+            "provider_summary": {},
+            "capability_rankings": {},
+            "notice": "No provider was invoked. No measured scores or rankings exist."
         }
 
 if __name__ == "__main__":
-    workspace = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
-    harness = ZWCADTestHarness(workspace)
-    harness.run_all_benchmarks()
+    workspace = str(Path(__file__).resolve().parent.parent)
+    ZWCADTestHarness(workspace).run_all_benchmarks()

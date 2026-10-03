@@ -19,7 +19,7 @@ This document outlines the strict behavioral principles, tool routing policies, 
 
 ## 2. Capability Routing Map
 
-When fulfilling user CAD requests, route to the primary provider based on the verified benchmark scorecard:
+When fulfilling user CAD requests, route to the primary provider only after independent host/fixture verification. The following map is an unverified design proposal, not a benchmark result:
 
 ```mermaid
 graph TD

@@ -1,3 +1,5 @@
+> Evidence correction: historical PASS rates, scores, rankings and performance claims in this document are unverified legacy assumptions (LEGACY_SYNTHETIC). They are not candidate MCP execution evidence. Do not use them to authorize execution.
+
 # CAD-MCP Candidate Matrix
 
 Comprehensive technical matrix comparing all 9 candidate CAD MCP servers and 8 benchmark architectures evaluated for ZWCAD integration.

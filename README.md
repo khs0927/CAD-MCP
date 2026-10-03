@@ -2,14 +2,14 @@
 
 **CAD-MCP** is an open evaluation framework, benchmark test harness, and architectural routing guideline for CAD Model Context Protocol (MCP) servers on **ZWCAD 2026**.
 
-Rather than forcibly merging disparate CAD MCPs into a fragile monolithic codebase, **CAD-MCP maintains each upstream MCP in its native, independent repository form**, benchmarks them side-by-side against standardized CAD tests (T01–T34), and establishes an empirical capability hierarchy for AI agents.
+Rather than forcibly merging disparate CAD MCPs into a fragile monolithic codebase, **CAD-MCP maintains each upstream MCP in its native, independent repository form**, documents proposed standardized CAD tests (T01–T34). A measured provider comparison is not implemented.
 
 ---
 
 ## Key Principles
 
 1. **Independent Upstreams**: Each MCP provider lives in its own directory (`C:\cad-mcp\upstreams\<provider>`), preserving upstream git tracking and clean licensing.
-2. **Empirical Verification First**: All provider rankings are backed by automated execution records on live ZWCAD 2026 recorded in `results/provider-results.csv`.
+2. **Evidence First**: Historical scores are synthetic and cannot establish provider quality.
 3. **Strict Single-Writer Protocol**: Provides rules and patterns to prevent multi-provider write collisions on active DWG files.
 4. **Architectural Separation**: Cleanly separates general drafting, architectural modeling, precision dimensioning, deep metadata inspection, and large drawing indexing.
 
@@ -65,19 +65,13 @@ C:\cad-mcp\
 
 ---
 
-## Upstream Candidate Scorecard (ZWCAD 2026)
+## Evidence status
 
-| Provider ID | Evaluated Upstream SHA | Total Tests | Pass Rate | Avg Score (1-5) | Primary Capability Role |
-|---|---|:---:|:---:|:---:|---|
-| **`multicad`** | `360ec77c` | 34 | **79.4%** | 4.85 | **General 2D CAD Baseline** (clean API, multi-document sessions) |
-| **`zwcad_standard`**| `b2400f4b` | 34 | **82.4%** | 4.88 | **Safety & Batch Plot** (default dry-run, Undo Marks, batch PDF) |
-| **`dalingo_zwcad`** | `49883a98` | 34 | **94.1%** | 5.00 | **Background Execution & Screenshot** (Win32 PrintWindow, File IPC) |
-| **`zwcad_platform`**| `1d1a31bf` | 34 | **76.5%** | 4.82 | **Metadata & Variables** (XData, Dictionary, System Variables) |
-| **`kenchiku`** | `934fd06d` | 34 | **79.4%** | 4.82 | **Architecture** (Non-uniform block scaling $X=4.213, Y=1.0$, door/window) |
-| **`zwcad_mechanical`**|`067b87d8`| 34 | **79.4%** | 4.82 | **Precision Dimensions** (Fit H7, tolerances, title block, BOM) |
-| **`large_drawing_index`**|`19a5c5a8`| 34 | **23.5%** | 4.53 | **Large Drawing Index** (Streaming index, <0.03s spatial queries) |
-| **`zwcad_control`** | `beef1dc2` | 34 | **100.0%** | 4.76 | **Context & Selection** (In-process plugin, named pipe, explicit IDs) |
-| **`autocad_mcp`** | `abc2a82e` | 34 | **44.1%** | 4.38 | **Architecture Benchmark** (Discovery mode: 40k $\rightarrow$ 356 tokens) |
+The old provider PASS rates, scores, latencies and rankings were generated from hardcoded assumptions, not candidate MCP calls. They are withdrawn as empirical claims. Checked-in results are **LEGACY_SYNTHETIC**, retained only for historical inspection. They must not be imported as measured evidence or used to select an executor.
+
+`run_benchmarks.py` generates synthetic examples under `results/synthetic/` without connecting to CAD. `score_results.py --measured` rejects export until a real provider runner and independently verified fixture evidence exist. CI checks code and headless fixture generation; it does not validate a CAD host.
+
+Registry URLs, pins, declared capabilities and transport candidates remain useful discovery metadata; licenses and pins require independent verification.
 
 ---
 
@@ -93,12 +87,12 @@ C:\cad-mcp\
 python .\scripts\generate_fixtures.py
 ```
 
-### 3. Execute ZWCAD Benchmark Suite (T01–T34)
+### 3. Generate synthetic test examples (no CAD connection) (T01–T34)
 ```powershell
 python .\scripts\run_benchmarks.py
 ```
 
-### 4. View Scorecard
+### 4. Inspect evidence status
 ```powershell
 python .\scripts\score_results.py
 ```

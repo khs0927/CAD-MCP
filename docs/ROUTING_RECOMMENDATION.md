@@ -1,3 +1,5 @@
+> Evidence correction: historical PASS rates, scores, rankings and performance claims in this document are unverified legacy assumptions (LEGACY_SYNTHETIC). They are not candidate MCP execution evidence. Do not use them to authorize execution.
+
 # CAD-MCP Routing Recommendation & Gateway Architecture
 
 Definitive evaluation of MCP routing strategies for multi-provider CAD environments.

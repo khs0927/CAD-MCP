@@ -1,3 +1,5 @@
+> Evidence correction: historical PASS rates, scores, rankings and performance claims in this document are unverified legacy assumptions (LEGACY_SYNTHETIC). They are not candidate MCP execution evidence. Do not use them to authorize execution.
+
 # CAD-MCP Test Matrix Specification (T01 – T34)
 
 Standardized test matrix for validating CAD MCP servers on live ZWCAD 2026 and related CAD engines.
